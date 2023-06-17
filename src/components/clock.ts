@@ -17,7 +17,7 @@ export function renderClock(process:any, callback:Function){
 
 var formatPercent = d3.format("02.0f")
 var getMin = (n)=>Math.floor(n / 60000)
-var getSec = (n)=>Math.floor(n / 1000) % 60
+var getSec = (n)=>Math.ceil(n / 1000) % 60
 
 class Clock{
     svg
