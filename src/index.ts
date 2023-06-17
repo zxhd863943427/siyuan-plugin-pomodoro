@@ -117,21 +117,24 @@ stop()
 }
 
 function updateTarget(){
-    currentTarget+=1
-    if (currentTarget >= 10)
+    if (data.length - currentTarget <= 1)
         data.push({value:1, status:"unstart"})
     currentProcess.type = currentProcess.type === "work" ? "rest" : "work"
     renderTarget(data);
 }
 
 function finishTarget(){
-    data[currentTarget].status = "finish"
+    if (currentProcess.type === "work"){
+        data[currentTarget].status = "finish"
+        currentTarget+=1
+    }
     updateTarget()
 }
 
 function skipTarget(){
 
     data[currentTarget].status = "skip"
+    currentTarget+=1
     updateTarget()
 }
 
