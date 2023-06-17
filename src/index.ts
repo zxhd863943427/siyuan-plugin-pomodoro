@@ -16,8 +16,10 @@ import "@/index.scss";
 import HelloExample from "@/hello.svelte";
 import SettingPannel from "@/libs/setting-panel.svelte";
 
-import { setI18n, setIsMobile } from "./utils";
+import { setI18n, setIsMobile, setMainSvg } from "./utils";
 import * as d3 from "d3"
+import { renderTarget } from "./components/target";
+import { test_data } from "./testData";
 
 window.d3 = d3
 
@@ -127,11 +129,13 @@ export default class PluginSample extends Plugin {
         <span class="fn__flex-1 fn__space"></span>
         <span data-type="min" class="block__icon b3-tooltips b3-tooltips__sw" aria-label="Min ${adaptHotkey("⌘W")}"><svg><use xlink:href="#iconMin"></use></svg></span>
     </div>
-    <svg id = "pomodoro_dock"></svg>
+    <svg id = "pomodoro_dock" viewBox="0 0 1024 1024"></svg>
     <div class="fn__flex-1 plugin-sample__custom-dock">
         ${this.data.text}
     </div>
 </div>`;
+setMainSvg();
+renderTarget(test_data);
             },
             destroy() {
                 console.log("destroy dock:", DOCK_TYPE);
