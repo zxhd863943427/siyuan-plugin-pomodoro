@@ -14,11 +14,14 @@ import { renderTarget } from "./components/target";
 import { renderProcess } from "./components/process";
 import { renderClock } from "./components/clock";
 import { test_data } from "./testData";
+import { finished } from "stream";
 
 window.d3 = d3
 
 const STORAGE_NAME = "menu-config";
 const DOCK_TYPE = "dock_tab";
+let currentTarget = 0
+let data;
 
 export default class PluginSample extends Plugin {
 
@@ -26,6 +29,7 @@ export default class PluginSample extends Plugin {
 
     async onload() {
         this.data[STORAGE_NAME] = {readonlyText: "Readonly"};
+        data = test_data
 
         console.log("loading plugin-sample", this.i18n);
 
@@ -62,11 +66,17 @@ export default class PluginSample extends Plugin {
 let test_process = {type:"test"}
 setMainSvg();
 setTransition(test_process);
-renderTarget(test_data);
+renderTarget(data);
 renderProcess([test_process])
 renderClock([test_process],function repeat(){
+    data[currentTarget].status = "finish"
+    currentTarget+=1
+
+    if (currentTarget >= 10)
+        data.push({value:1, status:"unstart"})
+    
     setTransition(test_process);
-    renderTarget(test_data);
+    renderTarget(data);
     renderProcess([test_process])
     renderClock([test_process],repeat)
 })
