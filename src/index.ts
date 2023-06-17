@@ -20,6 +20,7 @@ import { setI18n, setIsMobile, setMainSvg, setTransition } from "./utils";
 import * as d3 from "d3"
 import { renderTarget } from "./components/target";
 import { renderProcess } from "./components/process";
+import { renderClock } from "./components/clock";
 import { test_data } from "./testData";
 
 window.d3 = d3
@@ -135,10 +136,12 @@ export default class PluginSample extends Plugin {
         ${this.data.text}
     </div>
 </div>`;
+let test_process = {type:"rest"}
 setMainSvg();
-setTransition({type:"test"});
+setTransition(test_process);
 renderTarget(test_data);
-renderProcess([{type:"test"}])
+renderProcess([test_process])
+renderClock([test_process])
             },
             destroy() {
                 console.log("destroy dock:", DOCK_TYPE);
