@@ -9,13 +9,11 @@ import "@/index.scss";
 
 
 import { setI18n, setIsMobile, setMainSvg, setTransition } from "./utils";
-import * as d3 from "d3"
 import { renderTarget } from "./components/target";
 import { renderProcess } from "./components/process";
 import { renderClock } from "./components/clock";
 import { init_data } from "./initData";
 
-window.d3 = d3
 
 const STORAGE_NAME = "menu-config";
 const DOCK_TYPE = "dock_tab";
@@ -41,11 +39,11 @@ export default class PluginSample extends Plugin {
             config: {
                 position: "LeftBottom",
                 size: {width: 200, height: 0},
-                icon: "iconSaving",
-                title: "Custom Dock",
+                icon: "iconSparkles",
+                title: "Tiny Pomodoro",
             },
             data: {
-                text: "This is my custom dock"
+                text: "Tiny Pomodoro"
             },
             type: DOCK_TYPE,
             init() {
@@ -53,7 +51,7 @@ export default class PluginSample extends Plugin {
     <div class="block__icons">
         <div class="block__logo">
             <svg><use xlink:href="#iconEmoji"></use></svg>
-            Custom Dock
+            Tiny Pomodoro
         </div>
         <span class="fn__flex-1 fn__space"></span>
         <span data-type="min" class="block__icon b3-tooltips b3-tooltips__sw" aria-label="Min ${adaptHotkey("⌘W")}"><svg><use xlink:href="#iconMin"></use></svg></span>
@@ -84,7 +82,7 @@ export default class PluginSample extends Plugin {
 
 setMainSvg();
 renderTarget(data);
-(document.getElementById("pomodoro_start") as HTMLButtonElement).onclick = function(){start()};
+(document.getElementById("pomodoro_start") as HTMLButtonElement).onclick = start;
 (document.getElementById("pomodoro_stop") as HTMLButtonElement).onclick = stop;
 (document.getElementById("pomodoro_skip") as HTMLButtonElement).onclick = skip;
 stop()
