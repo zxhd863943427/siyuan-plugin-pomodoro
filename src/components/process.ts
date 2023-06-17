@@ -4,7 +4,7 @@ import { processSvg, transition } from "@/utils"
 const radius = (512) * 0.7
 const width = 10
 let arc = d3.arc().innerRadius(radius-width).outerRadius(radius).cornerRadius(0.01*radius)
-let color = d3.scaleOrdinal().domain(["work","rest","test"]).range(["#e4582b", "#97ce28","#97ce28"])
+let color = d3.scaleOrdinal().domain(["work","rest","stop","test"]).range(["#e4582b", "#97ce28","rgba(0, 0, 0, 0.15)","#97ce28"])
 //计算弧长
 let arcLong = d3.interpolateNumber(0, Math.PI*2)
 let Tween = (time)=>{return (t) => arc({
