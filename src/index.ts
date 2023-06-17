@@ -20,7 +20,7 @@ window.d3 = d3
 
 const STORAGE_NAME = "menu-config";
 const DOCK_TYPE = "dock_tab";
-let currentTarget = 0
+let currentTarget = -1
 let data;
 
 export default class PluginSample extends Plugin {
@@ -63,23 +63,10 @@ export default class PluginSample extends Plugin {
         ${this.data.text}
     </div>
 </div>`;
-let test_process = {type:"test"}
+let test_process = {type:"stop"}
 setMainSvg();
-setTransition(test_process);
 renderTarget(data);
-renderProcess([test_process])
-renderClock([test_process],function repeat(){
-    data[currentTarget].status = "finish"
-    currentTarget+=1
-
-    if (currentTarget >= 10)
-        data.push({value:1, status:"unstart"})
-    
-    setTransition(test_process);
-    renderTarget(data);
-    renderProcess([test_process])
-    renderClock([test_process],repeat)
-})
+start(test_process)
             },
             destroy() {
                 console.log("destroy dock:", DOCK_TYPE);
@@ -106,4 +93,23 @@ renderClock([test_process],function repeat(){
      * A custom setting pannel provided by svelte
      */
 
+}
+
+function updateTarget(){
+    currentTarget+=1
+    if (currentTarget <= 0){
+        return
+    }
+    data[currentTarget].status = "finish"
+    
+
+    if (currentTarget >= 10)
+        data.push({value:1, status:"unstart"})
+    renderTarget(data);
+}
+
+function start(process){
+    setTransition(process);
+    renderProcess([process])
+    renderClock([process],updateTarget)
 }
