@@ -1,18 +1,18 @@
 {
-  "name": "plugin-sample-vite-svelte",
-  "author": "frostime",
-  "url": "https://github.com/siyuan-note/plugin-sample-vite-svelte",
-  "version": "0.1.4",
+  "name": "siyuan-plugin-pomodoro",
+  "author": "zxhd863943427",
+  "url": "https://github.com/zxhd863943427/siyuan-plugin-pomodoro",
+  "version": "0.0.1",
   "minAppVersion": "2.9.0",
   "backends": ["all"],
   "frontends": ["all"],
   "displayName": {
-    "en_US": "Plugin sample with vite and svelte",
-    "zh_CN": "插件样例 vite + svelte 版"
+    "en_US": "Tiny Pomodoro",
+    "zh_CN": "迷你番茄钟"
   },
   "description": {
-    "en_US": "SiYuan plugin sample with vite and svelte",
-    "zh_CN": "使用 vite 和 svelte 开发的思源插件样例"
+    "en_US": "Add a Pomodoro to SiYuan that has nothing to do with tomatoes",
+    "zh_CN": "给思源增加一个跟番茄没有一点关系的番茄钟"
   },
   "readme": {
     "en_US": "README.md",
@@ -20,7 +20,7 @@
   },
   "funding": {
     "custom": [
-      "https://afdian.net/a/frostime"
+      "https://afdian.net/a/zxhd86"
     ]
   }
 }
