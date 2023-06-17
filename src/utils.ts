@@ -28,7 +28,7 @@ export type status = "unstart"|"finish"|"skip"
 export type process = "work"|"rest"
 
 export let transition
-let timeLong = d3.scaleOrdinal().domain(["work","rest","test"]).range([1500000, 300000, 20000]) // 25min and 5 min and 20s
+export let timeLong = d3.scaleOrdinal().domain(["work","rest","test"]).range([1500000, 300000, 10000]) // 25min and 5 min and 20s
 export function setTransition(d){
     transition = d3.transition()
     .duration(timeLong(d.type))

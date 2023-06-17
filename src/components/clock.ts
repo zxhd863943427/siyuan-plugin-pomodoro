@@ -1,10 +1,9 @@
 import * as d3 from "d3"
-import { clockSvg, transition } from "@/utils"
+import { clockSvg, transition, timeLong } from "@/utils"
 
 const radius = (512) * 0.7
 const width = 10
 let arc = d3.arc().innerRadius(radius-width).outerRadius(radius).cornerRadius(0.01*radius)
-let timeLong = d3.scaleOrdinal().domain(["work","rest","test"]).range([1500000, 300000, 20000]) 
 let color = d3.scaleOrdinal().domain(["work","rest","test"]).range(["#e4582b", "#97ce28","#97ce28"])
 //计算弧长
 let arcLong = d3.interpolateNumber(0, Math.PI*2)
