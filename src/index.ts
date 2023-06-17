@@ -16,6 +16,11 @@ import "@/index.scss";
 import HelloExample from "@/hello.svelte";
 import SettingPannel from "@/libs/setting-panel.svelte";
 
+import { setI18n, setIsMobile } from "./utils";
+import * as d3 from "d3"
+
+window.d3 = d3
+
 const STORAGE_NAME = "menu-config";
 const TAB_TYPE = "custom_tab";
 const DOCK_TYPE = "dock_tab";
@@ -32,6 +37,8 @@ export default class PluginSample extends Plugin {
 
         const frontEnd = getFrontend();
         this.isMobile = frontEnd === "mobile" || frontEnd === "browser-mobile";
+        setI18n(this.i18n)
+        setIsMobile(this.isMobile)
         // 图标的制作参见帮助文档
         this.addIcons(`<symbol id="iconFace" viewBox="0 0 32 32">
 <path d="M13.667 17.333c0 0.92-0.747 1.667-1.667 1.667s-1.667-0.747-1.667-1.667 0.747-1.667 1.667-1.667 1.667 0.747 1.667 1.667zM20 15.667c-0.92 0-1.667 0.747-1.667 1.667s0.747 1.667 1.667 1.667 1.667-0.747 1.667-1.667-0.747-1.667-1.667-1.667zM29.333 16c0 7.36-5.973 13.333-13.333 13.333s-13.333-5.973-13.333-13.333 5.973-13.333 13.333-13.333 13.333 5.973 13.333 13.333zM14.213 5.493c1.867 3.093 5.253 5.173 9.12 5.173 0.613 0 1.213-0.067 1.787-0.16-1.867-3.093-5.253-5.173-9.12-5.173-0.613 0-1.213 0.067-1.787 0.16zM5.893 12.627c2.28-1.293 4.040-3.4 4.88-5.92-2.28 1.293-4.040 3.4-4.88 5.92zM26.667 16c0-1.040-0.16-2.040-0.44-2.987-0.933 0.2-1.893 0.32-2.893 0.32-4.173 0-7.893-1.92-10.347-4.92-1.4 3.413-4.187 6.093-7.653 7.4 0.013 0.053 0 0.12 0 0.187 0 5.88 4.787 10.667 10.667 10.667s10.667-4.787 10.667-10.667z"></path>
@@ -120,6 +127,7 @@ export default class PluginSample extends Plugin {
         <span class="fn__flex-1 fn__space"></span>
         <span data-type="min" class="block__icon b3-tooltips b3-tooltips__sw" aria-label="Min ${adaptHotkey("⌘W")}"><svg><use xlink:href="#iconMin"></use></svg></span>
     </div>
+    <svg id = "pomodoro_dock"></svg>
     <div class="fn__flex-1 plugin-sample__custom-dock">
         ${this.data.text}
     </div>
@@ -130,32 +138,7 @@ export default class PluginSample extends Plugin {
             }
         });
 
-        const textareaElement = document.createElement("textarea");
-        this.setting = new Setting({
-            confirmCallback: () => {
-                this.saveData(STORAGE_NAME, {readonlyText: textareaElement.value});
-            }
-        });
-        this.setting.addItem({
-            title: "Readonly text",
-            createActionElement: () => {
-                textareaElement.className = "b3-text-field fn__block";
-                textareaElement.placeholder = "Readonly text in the menu";
-                textareaElement.value = this.data[STORAGE_NAME].readonlyText;
-                return textareaElement;
-            },
-        });
-        const btnaElement = document.createElement("button");
-        btnaElement.className = "b3-button b3-button--outline fn__flex-center fn__size200";
-        btnaElement.textContent = "Open";
-        btnaElement.addEventListener("click", () => {
-            window.open("https://github.com/siyuan-note/plugin-sample-vite-svelte");
-        });
-        this.setting.addItem({
-            title: "Open plugin url",
-            description: "Open plugin url in browser",
-            actionElement: btnaElement,
-        });
+
 
         console.log(this.i18n.helloPlugin);
     }
