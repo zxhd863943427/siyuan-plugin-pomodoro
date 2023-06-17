@@ -1,4 +1,4 @@
-import { status } from "./components/target";
+import { status } from "./utils"
 
 export let test_data:Array<{value:number,status:status}> = [
     {value:1, status:"unstart"},

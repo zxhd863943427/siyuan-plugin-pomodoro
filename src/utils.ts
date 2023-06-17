@@ -19,3 +19,5 @@ export let mainSvg
 export function setMainSvg(){
     mainSvg = select("#pomodoro_dock");
 }
+
+export type status = "unstart"|"finish"|"skip"
