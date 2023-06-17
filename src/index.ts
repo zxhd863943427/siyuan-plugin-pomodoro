@@ -16,9 +16,10 @@ import "@/index.scss";
 import HelloExample from "@/hello.svelte";
 import SettingPannel from "@/libs/setting-panel.svelte";
 
-import { setI18n, setIsMobile, setMainSvg } from "./utils";
+import { setI18n, setIsMobile, setMainSvg, setTransition } from "./utils";
 import * as d3 from "d3"
 import { renderTarget } from "./components/target";
+import { renderProcess } from "./components/process";
 import { test_data } from "./testData";
 
 window.d3 = d3
@@ -135,7 +136,9 @@ export default class PluginSample extends Plugin {
     </div>
 </div>`;
 setMainSvg();
+setTransition({type:"test"});
 renderTarget(test_data);
+renderProcess([{type:"test"}])
             },
             destroy() {
                 console.log("destroy dock:", DOCK_TYPE);
