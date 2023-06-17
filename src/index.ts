@@ -138,7 +138,7 @@ function skipTarget(){
 
 function start(){
     let process = currentProcess
-    console.log(currentProcess)
+    // console.log(currentProcess)
     setTransition(process);
     renderProcess([process])
     renderClock([process],finishTarget)

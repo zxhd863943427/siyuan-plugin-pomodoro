@@ -22,7 +22,7 @@ var getSec = (n)=>Math.floor(n / 1000) % 60
 class Clock{
     svg
     constructor(data:any, callback:Function){
-        console.log(data)
+        // console.log(data)
         clockSvg.selectAll('text').data(data)
         .join('text')
         .attr('text-anchor', 'middle')

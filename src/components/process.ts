@@ -18,7 +18,7 @@ export function renderProcess(process:any){
 
 class Process{
     constructor(data:any){
-        console.log(data)
+        // console.log(data)
         processSvg.selectAll('path').data(data)
         .join('path')
         .attr('fill',d=>color(d.type))
