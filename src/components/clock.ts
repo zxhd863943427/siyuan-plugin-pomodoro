@@ -1,5 +1,5 @@
 import * as d3 from "d3"
-import { mainSvg, transition } from "@/utils"
+import { clockSvg, transition } from "@/utils"
 
 const radius = (512) * 0.7
 const width = 10
@@ -12,9 +12,8 @@ let Tween = (time)=>{return (t) => arc({
     startAngle: 0,
     endAngle: arcLong(t)})}
 
-export function renderClock(process:any){
-    console.log(mainSvg)
-    let target = new Clock(mainSvg,process)
+export function renderClock(process:any, callback:Function){
+    let target = new Clock(process, callback)
 }
 
 var formatPercent = d3.format("02.0f")
@@ -22,10 +21,10 @@ var getMin = (n)=>Math.floor(n / 60000)
 var getSec = (n)=>Math.floor(n / 1000) % 60
 
 class Clock{
-    constructor(svg:d3.select, data:any){
+    svg
+    constructor(data:any, callback:Function){
         console.log(data)
-        svg.append("g").attr("transform","translate(512,512)")
-        .selectAll('text').data(data)
+        clockSvg.selectAll('text').data(data)
         .join('text')
         .attr('text-anchor', 'middle')
         .attr("font-size",100)
@@ -34,9 +33,10 @@ class Clock{
         .tween("text", function(d) {
             var i = d3.interpolate(0, timeLong(d.type));
             return function(t) {
-                let ms = i(t)
+                let ms = i(1-t)
                 this.textContent = `${formatPercent(getMin(ms))}:${formatPercent(getSec(ms))}`;
             };
         })
+        .transition().on("start",callback)
     }
 }

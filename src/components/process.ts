@@ -1,5 +1,5 @@
 import * as d3 from "d3"
-import { mainSvg, transition } from "@/utils"
+import { processSvg, transition } from "@/utils"
 
 const radius = (512) * 0.7
 const width = 10
@@ -12,15 +12,14 @@ let Tween = (time)=>{return (t) => arc({
     endAngle: arcLong(t)})}
 
 export function renderProcess(process:any){
-    console.log(mainSvg)
-    let target = new Process(mainSvg,process)
+
+    let target = new Process(process)
 }
 
 class Process{
-    constructor(svg:d3.select, data:any){
+    constructor(data:any){
         console.log(data)
-        svg.append("g").attr("transform","translate(512,512)")
-        .selectAll('path').data(data)
+        processSvg.selectAll('path').data(data)
         .join('path')
         .attr('fill',d=>color(d.type))
         .transition(transition)

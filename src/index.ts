@@ -136,12 +136,17 @@ export default class PluginSample extends Plugin {
         ${this.data.text}
     </div>
 </div>`;
-let test_process = {type:"rest"}
+let test_process = {type:"test"}
 setMainSvg();
 setTransition(test_process);
 renderTarget(test_data);
 renderProcess([test_process])
-renderClock([test_process])
+renderClock([test_process],function repeat(){
+    setTransition(test_process);
+    renderTarget(test_data);
+    renderProcess([test_process])
+    renderClock([test_process],repeat)
+})
             },
             destroy() {
                 console.log("destroy dock:", DOCK_TYPE);

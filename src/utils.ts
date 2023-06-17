@@ -14,10 +14,13 @@ export function setIsMobile(isMobile_: boolean) {
 
 
 
-export let mainSvg
+export let mainSvg, clockSvg, targetSvg, processSvg
 
 export function setMainSvg(){
     mainSvg = d3.select("#pomodoro_dock");
+    clockSvg = mainSvg.append("g").attr("transform","translate(512,532)")
+    targetSvg = mainSvg.append("g").attr("transform","translate(512,512)")
+    processSvg = mainSvg.append("g").attr("transform","translate(512,512)")
 }
 
 export type status = "unstart"|"finish"|"skip"
